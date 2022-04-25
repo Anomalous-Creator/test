@@ -21,11 +21,17 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check docs only
-        run: echo "non_doc_files_changed=$(git diff --name-only origin/main | sed '/docs\//d')" >> $GITHUB_ENV
+        run: |
+          non_doc_files_changed=$(git diff --name-only origin/main | sed '/docs\//d')
+          if non_doc_files_changed -eq 0; then
+            echo "docs_only=true" >> $GITHUB_ENV
+          else
+            echo "docs_only=false" >> $GITHUB_ENV
+          fi
 
       - name: Add label
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ env.non_doc_files_changed == '0' }}
+        if: ${{ env.docs_only == 'true' }}
         with:
           labels: 
             force-skip-ci
