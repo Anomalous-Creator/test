@@ -12,9 +12,6 @@ on:
       - edited
       - reopened
       - synchronize
-      
-env:
-  is_docs_only: false
 
 jobs:
   check_and_label:
@@ -32,13 +29,10 @@ jobs:
           else
             echo "is_docs_only=false" >> $GITHUB_ENV
           fi
-          
-      - name: Blank
-        run: echo "hi"
 
       - name: Add label
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ env.is_docs_only == 'true' }}
+        if: env.is_docs_only
         with:
           labels: 
             force-skip-ci
