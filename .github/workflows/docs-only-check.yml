@@ -18,12 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
         
       - name: Check docs only
         run: |
           git fetch origin main
-          non_doc_files_changed=( $(git diff --name-only origin/main) ) # | sed '/docs\//d') )
+          non_doc_files_changed=( $(git diff --name-only origin/main | sed '/docs\//d') )
           num_non_docs=${#non_doc_files_changed[@]}
           if [ "$num_non_docs" == "0" ]; then
             echo "non_docs=$non_doc_files_changed" >> $GITHUB_ENV
