@@ -1,0 +1,31 @@
+# Copyright (c) 2022 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+name: Docs only check
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+jobs:
+  check_and_label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v3
+
+      - name: Check docs only
+        run: non_doc_files_changed=${{ git diff --name-only main | sed '/docs\//d' }}
+
+      - name: Add label
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ $non_doc_files_changed -eq 0 }}
+        with:
+          labels: 
+            force-skip-ci
