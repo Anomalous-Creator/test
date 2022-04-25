@@ -24,9 +24,9 @@ jobs:
         run: |
           non_doc_files_changed=$(git diff --name-only origin/main | sed '/docs\//d')
           if non_doc_files_changed -eq 0; then
-            echo "docs_only=true" >> $GITHUB_ENV
+            echo "::set-env name=docs_only::true" >> $GITHUB_ENV
           else
-            echo "docs_only=false" >> $GITHUB_ENV
+            echo "::set-env name=docs_only::false" >> $GITHUB_ENV
           fi
 
       - name: Add label
