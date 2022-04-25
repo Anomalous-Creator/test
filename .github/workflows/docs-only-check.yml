@@ -31,7 +31,7 @@ jobs:
 
       - name: Add label
         uses: actions-ecosystem/action-add-labels@v1
-        #if: ${{ env.docs_only == 'true' }}
+        if: ${{ env.docs_only == 'true' }}
         with:
           labels: 
             force-skip-ci
