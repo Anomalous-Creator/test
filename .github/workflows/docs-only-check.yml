@@ -23,7 +23,7 @@ jobs:
       - name: Check docs only
         run: |
           non_doc_files_changed=$(git diff --name-only origin/main | sed '/docs\//d')
-          if $non_doc_files_changed -eq 0; then
+          if $non_doc_files_changed=0; then
             echo "::set-env name=docs_only::true" >> $GITHUB_ENV
           else
             echo "::set-env name=docs_only::false" >> $GITHUB_ENV
