@@ -34,7 +34,7 @@ jobs:
           fi
 
       - name: Add label
-        if: ${{ env.is_docs_only == true }}
+        if: env.is_docs_only == true
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: 
