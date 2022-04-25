@@ -22,10 +22,10 @@ jobs:
         
       - name: Check docs only
         run: |
-          non_doc_files_changed=( $(git diff --name-only main | sed '/docs\//d') )
+          non_doc_files_changed=( $(git diff --name-only origin/main | sed '/docs\//d') )
           num_non_docs=${#non_doc_files_changed[@]}
           if [ "$num_non_docs" == "0" ]; then
-            echo "var_check=false" >> $GITHUB_ENV
+            echo "non_docs=$non_doc_files_changed" >> $GITHUB_ENV
             echo "is_docs_only=true" >> $GITHUB_ENV
           else
             echo "is_docs_only=false" >> $GITHUB_ENV
