@@ -12,6 +12,9 @@ on:
       - edited
       - reopened
       - synchronize
+      
+env:
+  is_docs_only: false
 
 jobs:
   check_and_label:
