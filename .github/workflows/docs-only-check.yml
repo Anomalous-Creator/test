@@ -34,8 +34,8 @@ jobs:
           fi
 
       - name: Add label
-        uses: actions-ecosystem/action-add-labels@v1
         if: env.is_docs_only
+        uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: 
             force-skip-ci
