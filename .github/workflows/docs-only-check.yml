@@ -29,7 +29,8 @@ jobs:
           
       - name: Check docs only
         run: |
-          non_doc_files_changed=$((git fetch origin main:main) && (git diff --name-only main | sed '/docs\//d'))
+          git fetch origin main:main
+          non_doc_files_changed=$(git diff --name-only main | sed '/docs\//d')
           num_non_docs=${#non_doc_files_changed[@]}
           if [ "$num_non_docs" = "0" ]; then
             echo "is_docs_only=true" >> $GITHUB_ENV
