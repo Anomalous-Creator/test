@@ -39,7 +39,7 @@ jobs:
             echo "$non_doc_files_changed"
           else
             echo "is_docs_only=false" >> $GITHUB_ENV
-            echo "$non_doc_files_Changed
+            echo "$non_doc_files_Changed"
           fi
         
       - name: Add label
