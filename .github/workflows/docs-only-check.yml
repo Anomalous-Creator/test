@@ -21,17 +21,20 @@ jobs:
         uses: actions/checkout@main
         with:
           ref: ${{ github.head_ref }}
-        
+      
+      - name: Remove label
+        uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          labels: force-skip-ci
+          
       - name: Check docs only
         run: |
           git fetch origin main
           non_doc_files_changed=$((git fetch origin main:main) && (git diff --name-only main)) # | sed '/docs\//d'))
           num_non_docs=${#non_doc_files_changed[@]}
           if [ "$num_non_docs" = "1" ]; then
-            echo "docs=$non_doc_files_changed" >> $GITHUB_ENV
             echo "is_docs_only=true" >> $GITHUB_ENV
           else
-            echo "docs=$num_non_docs" >> $GITHUB_ENV
             echo "is_docs_only=false" >> $GITHUB_ENV
           fi
 
