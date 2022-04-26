@@ -36,10 +36,10 @@ jobs:
           num_non_docs=${#non_docs[@]}
           if [ "$num_non_docs" = "0" ]; then
             echo "is_docs_only=true" >> $GITHUB_ENV
-            echo "$non_doc_files_changed"
+            echo "$non_docs"
           else
             echo "is_docs_only=false" >> $GITHUB_ENV
-            echo "$non_doc_files_Changed"
+            echo "$non_docs"
           fi
         
       - name: Add label
