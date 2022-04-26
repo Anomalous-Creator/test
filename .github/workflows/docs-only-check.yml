@@ -32,6 +32,9 @@ jobs:
             echo "is_docs_only=true" >> $GITHUB_ENV
           fi
 
+      - name: useless check
+        run: echo "this doesn't actually do anything"
+        
       - name: Add label
         if: ${{ env.is_docs_only == 'true' }}
         uses: actions-ecosystem/action-add-labels@v1
