@@ -27,21 +27,20 @@ jobs:
         with:
           labels: force-skip-ci
           
+      - name: Get files changed
+        uses: jitterbit/get-changed-files@v1
+        
       - name: Check docs only
-        run: |
-          git fetch origin main:main
-          non_doc_files_changed=$(git diff --name-only origin/main HEAD) # | sed '/docs\//d')
-          num_non_docs=${#non_doc_files_changed[@]}
-          if [ "$num_non_docs" = "0" ]; then
+        run: | 
+          non_docs=(sed '/docs\//d' ($steps.files.outputs.all))
+          num_non_docs=${#non_docs[@]}
+          if ["$num_non_docs" = "0"]; then
             echo "is_docs_only=true" >> $GITHUB_ENV
             echo "$non_doc_files_changed"
           else
-            echo "$non_doc_files_changed"
             echo "is_docs_only=false" >> $GITHUB_ENV
+            echo "$non_doc_files_Changed
           fi
-
-      - name: useless check
-        run: echo "this doesn't actually do anything"
         
       - name: Add label
         if: ${{ env.is_docs_only == 'true' }}
