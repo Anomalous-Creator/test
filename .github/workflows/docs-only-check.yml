@@ -32,7 +32,7 @@ jobs:
         
       - name: Check docs only
         run: | 
-          non_docs=$(sed '/docs\//d' $(steps.files.outputs.all))
+          non_docs=$(sed '/docs\//d' $steps.files.outputs.all)
           num_non_docs=${#non_docs[@]}
           if ["$num_non_docs" = "0"]; then
             echo "is_docs_only=true" >> $GITHUB_ENV
