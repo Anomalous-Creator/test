@@ -35,7 +35,7 @@ jobs:
             echo "is_docs_only=true" >> $GITHUB_ENV
             echo "docs=$num_non_docs" >> $GITHUB_ENV
           else
-            echo "docs=$num_non_docs" >> $GITHUB_ENV
+            echo "docs=$(non_doc_files_changed)" >> $GITHUB_ENV
             echo "is_docs_only=false" >> $GITHUB_ENV
           fi
 
