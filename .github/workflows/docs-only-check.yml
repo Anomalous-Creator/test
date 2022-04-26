@@ -36,9 +36,11 @@ jobs:
           num_non_docs=${#non_docs[@]}
           if [ "$num_non_docs" = "0" ]; then
             echo "is_docs_only=true" >> $GITHUB_ENV
+            echo "${{ steps.files.outputs.all }}"
             echo "$num_non_docs"
           else
             echo "is_docs_only=false" >> $GITHUB_ENV
+            echo "${{ steps.files.outputs.all }}"
             echo "$num_non_docs"
           fi
         
