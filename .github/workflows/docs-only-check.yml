@@ -13,6 +13,9 @@ on:
       - reopened
       - synchronize
 
+env:
+  is_docs_only: true
+
 jobs:
   check_and_label:
     runs-on: ubuntu-latest
@@ -31,18 +34,13 @@ jobs:
         uses: jitterbit/get-changed-files@v1
         
       - name: Check docs only
-        run: | 
-          non_docs=$(sed '/docs\//d' ${{ steps.files.outputs.all }})
-          num_non_docs=${#non_docs[@]}
-          if [ "$num_non_docs" = "0" ]; then
-            echo "is_docs_only=true" >> $GITHUB_ENV
-            echo "${{ steps.files.outputs.all }}"
-            echo "$num_non_docs"
-          else
-            echo "is_docs_only=false" >> $GITHUB_ENV
-            echo "${{ steps.files.outputs.all }}"
-            echo "$num_non_docs"
-          fi
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            if [[ ! ${changed_file} =~ "docs/" ]]; then
+              echo "is_docs_only=false" >> $GITHUB_ENV
+            fi
+          done
+
         
       - name: Add label
         if: ${{ env.is_docs_only == 'true' }}
