@@ -35,6 +35,7 @@ jobs:
         run: |
           echo "got here"
           for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "got here"
             echo "$changed_file"
             if [[ ${changed_file} != docs/* ]]; then
               echo "is_docs_only=false" >> $GITHUB_ENV
