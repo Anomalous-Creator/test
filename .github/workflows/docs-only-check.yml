@@ -36,7 +36,7 @@ jobs:
       - name: Check docs only
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "${changed_file}"
+            echo "got here"
             if [[ ${changed_file} != docs/* ]]; then
               echo "is_docs_only=false" >> $GITHUB_ENV
             fi
