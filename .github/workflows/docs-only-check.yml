@@ -33,6 +33,7 @@ jobs:
         
       - name: Check docs only
         run: |
+          echo "got here"
           for changed_file in ${{ steps.files.outputs.all }}; do
             echo "$changed_file"
             if [[ ${changed_file} != docs/* ]]; then
