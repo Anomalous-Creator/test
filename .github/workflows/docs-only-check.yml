@@ -20,9 +20,9 @@ jobs:
   check_and_label:
     runs-on: ubuntu-latest
     steps:
-      #- name: Checkout code
-      #  uses: actions/checkout@v3
-      #
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
       - name: Remove label
         uses: actions-ecosystem/action-remove-labels@v1
         with:
@@ -34,8 +34,9 @@ jobs:
       - name: Check docs only
         run: |
           echo "got here"
-          for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "got here"
+          
+          changed_files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
+          for changed_file in $changed_files; do
             echo "$changed_file"
             if [[ ${changed_file} != docs/* ]]; then
               echo "is_docs_only=false" >> $GITHUB_ENV
