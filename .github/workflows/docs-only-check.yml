@@ -21,9 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@main
-        with:
-          ref: ${{ github.head_ref }}
+        uses: actions/checkout@v3
       
       - name: Remove label
         uses: actions-ecosystem/action-remove-labels@v1
@@ -36,7 +34,6 @@ jobs:
       - name: Check docs only
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "got here"
             if [[ ${changed_file} != docs/* ]]; then
               echo "is_docs_only=false" >> $GITHUB_ENV
             fi
