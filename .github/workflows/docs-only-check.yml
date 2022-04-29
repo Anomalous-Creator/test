@@ -14,7 +14,7 @@ on:
       - synchronize
 
 env:
-  is_docs_only: false
+  is_docs_only: true
 
 jobs:
   check_and_label:
@@ -32,13 +32,12 @@ jobs:
         uses: technote-space/get-diff-action@v6
         with:
           PATTERNS: |
-            src/*
             !docs/*
             
       - name: Check docs only
         run: |
           if [[ env.GIT_DIFF ]]; then
-            echo "is_docs_only=true" >> $GITHUB_ENV
+            echo "is_docs_only=false" >> $GITHUB_ENV
           fi
         
       - name: Add label
