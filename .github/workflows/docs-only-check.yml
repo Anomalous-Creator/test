@@ -31,16 +31,12 @@ jobs:
       - name: Get files changed
         uses: technote-space/get-diff-action@v6
         with:
-          PATTERNS: '!docs/*'
-            
-      - name: Check docs only
-        run: |
-          if [[ env.GIT_DIFF ]]; then
-            echo "is_docs_only=false" >> $GITHUB_ENV
-          fi
+          PATTERNS: |
+            *
+            !docs/*
         
       - name: Add label
-        if: ${{ env.is_docs_only == 'true' }}
+        if: env.GIT_DIFF
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: 
