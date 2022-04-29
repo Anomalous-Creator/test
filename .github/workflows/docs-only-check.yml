@@ -14,7 +14,7 @@ on:
       - synchronize
 
 env:
-  is_docs_only: true
+  is_docs_only: false
 
 jobs:
   check_and_label:
