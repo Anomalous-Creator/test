@@ -35,7 +35,8 @@ jobs:
         run: |
           echo "got here"
           
-          changed_files="$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
+          #changed_files="$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
+          echo 'steps.files.outputs.all=${{ steps.files.outputs.all }}'
           for changed_file in $changed_files; do
             echo "$changed_file"
             if [[ ${changed_file} != docs/* ]]; then
