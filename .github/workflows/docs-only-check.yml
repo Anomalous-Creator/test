@@ -36,7 +36,7 @@ jobs:
             !**/docs/**
         
       - name: Add label
-        if: env.GIT_DIFF
+        if: ! env.GIT_DIFF
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: 
