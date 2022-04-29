@@ -39,7 +39,6 @@ jobs:
           if [[ env.GIT_DIFF ]]; then
             echo "is_docs_only=true" >> $GITHUB_ENV
           fi
-          done
         
       - name: Add label
         if: ${{ env.is_docs_only == 'true' }}
