@@ -29,18 +29,17 @@ jobs:
           labels: force-skip-ci
           
       - name: Get files changed
-        uses: jitterbit/get-changed-files@v1
-        
+      - uses: technote-space/get-diff-action@v6
+        with:
+          PATTERNS: |
+            !docs/*
+            
       - name: Check docs only
         run: |
-          echo "got here"
-          
-          #changed_files="$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
-          echo 'steps.files.outputs.all=${{ steps.files.outputs.all }}'
           for changed_file in $changed_files; do
             echo "$changed_file"
-            if [[ ${changed_file} != docs/* ]]; then
-              echo "is_docs_only=false" >> $GITHUB_ENV
+            if [[ env.GIT_DIFF ]]; then
+              echo "is_docs_only=true" >> $GITHUB_ENV
             fi
           done
         
