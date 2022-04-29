@@ -30,17 +30,15 @@ jobs:
           
       - name: Get files changed
         uses: technote-space/get-diff-action@v6
-#        with:
-#          PATTERNS: |
-#            !docs/*
+        with:
+          PATTERNS: |
+            !docs/**
             
       - name: Check docs only
         run: |
-          for changed_file in $changed_files; do
-            echo "$changed_file"
-            if [[ env.GIT_DIFF ]]; then
-              echo "is_docs_only=true" >> $GITHUB_ENV
-            fi
+          if [[ env.GIT_DIFF ]]; then
+            echo "is_docs_only=true" >> $GITHUB_ENV
+          fi
           done
         
       - name: Add label
