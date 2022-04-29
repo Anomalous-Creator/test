@@ -29,7 +29,7 @@ jobs:
           labels: force-skip-ci
           
       - name: Get files changed
-      - uses: technote-space/get-diff-action@v6
+        uses: technote-space/get-diff-action@v6
         with:
           PATTERNS: |
             !docs/*
