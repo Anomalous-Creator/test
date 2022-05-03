@@ -30,8 +30,8 @@ jobs:
           
       - name: Get files changed
         uses: technote-space/get-diff-action@v6
-        with:
-          PATTERNS: '!docs/**'
+#        with:
+#          PATTERNS: '!docs/**'
         
       - name: Add label
         if: ${{!env.GIT_DIFF}}
